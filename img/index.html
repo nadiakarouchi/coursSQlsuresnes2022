@@ -82,13 +82,13 @@
   <div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="img/pma.jpg" class="d-block w-75 img-fluid text-center" alt="sql">
+        <img src="pma.jpg" class="d-block w-75 img-fluid text-center" alt="sql">
       </div>
       <div class="carousel-item">
-        <img src="img/sql.jpg" class="d-block w-75 img-fluid text-center" alt="sqlmediaa">
+        <img src="sql.jpg" class="d-block w-75 img-fluid text-center" alt="sqlmediaa">
       </div>
       <div class="carousel-item">
-        <img src="img/php.jpg" class="d-block w-75 img-fluid text-center" alt="php">
+        <img src="php.jpg" class="d-block w-75 img-fluid text-center" alt="php">
       </div>
     </div>
   </div>
@@ -165,11 +165,11 @@
       </div>
       <!-- fin col  -->
       <div class="col-12 col-md-6 col-lg-6 m-auto border">
-        <img src="img/tableau.jpg" alt="table" class="w-50 h-25 img-fluid">
+        <img src="tableau.jpg" alt="table" class="w-50 h-25 img-fluid">
       </div>
       <!-- fin col  -->
       <div class="col-12 col-md-6 col-lg-6 m-auto border">
-        <img src="img/BDD.jpg" alt="table" class="w-75 h-50 img-fluid">
+        <img src="BDD.jpg" alt="table" class="w-75 h-50 img-fluid">
       </div>
       <!-- fin col  -->
     </div>
@@ -195,7 +195,7 @@
       <div class="col-12 col-md-6 col-lg-4 border">
         <h2 style="background-color: lightcyan;">tableau bases données par id</h2>
         <hr>
-        <img src="img/id-donnees.jpg" alt="table" class="w-75 h-50 img-fluid">
+        <img src="id-donnees.jpg" alt="table" class="w-75 h-50 img-fluid">
 
       </div>
       <!-- fin col  -->
@@ -237,7 +237,7 @@
     <!-- fin row -->
 
     <div class="row">
-      <h2 id="types" style="background-color: lightcyan;"> 5 -les types de donnés</h2>
+      <h2 id="types" style="background-color: lightcyan;">les types de donnés</h2>
       <hr>
       <div class="col-10 bg-light">
         <table class="table table-striped table-sm">
@@ -331,105 +331,26 @@
 
     <div class="row">
       <div class="col-6 border">
-        <h2 style="background-color: lightcyan;"> 7 - Les cardinalités</h2> <hr>
-        <ul>
-          <li>les cardinalités permettent de connaitre le chiffre minimum et maximum d'enregistrement pour une relation
-          </li>
-          <li>ex: un homme est le fils d'une femme et d'une seule (minimum = 1 et max =1) <br>
-            en revanche une femme peut n'avoir aucun enfant ou plusieurs (min = 0 et max = n)(n = nombre entier naturel)
-          </li>
-          <li> Exemple : 1 livre possède forcément 1 auteur et qu'1 seul. Relation (1,1). Minimum 1 auteur, Maximum 1
-            auteur</li>
-          <li>1 auteur peut avoir écrit plusieurs livre (ou aucun). Relation (0,n). Minimum 0 livre, Maximum N livres
-          </li>
-          <li>Dans cet exemple une table auteurs et une table livres suffisent : nous n'avons pas besoin de table de
-            jointure</li>
-        </ul>
+        <h5 style="background-color: lightcyan;">Les cardinalités</h5>
+       <ul>
+         <li>les cardinalités permettent de connaitre le chiffre minimum et maximum d'enregistrement pour une relation</li>
+         <li>ex: un homme est le fils d'une  femme et d'une seule (minimum = 1 et max =1) <br> 
+        en revanche une femme peut n'avoir aucun enfant ou plusieurs (min = 0 et max = n)(n = nombre entier naturel)</li>
+          <li> Exemple : 1 livre possède forcément 1 auteur et qu'1 seul. Relation (1,1). Minimum 1 auteur, Maximum 1 auteur</li>
+          <li>1 auteur peut avoir écrit plusieurs livre (ou aucun). Relation (0,n). Minimum 0 livre, Maximum N livres</li>
+          <li>Dans cet exemple une table auteurs et une table livres suffisent : nous n'avons pas besoin de table de jointure</li>
+       </ul>
       </div>
       <!-- fi col  -->
-      <div class="col-6 border">
-        <figure>
-          <img src="img/cardinalites.jpg" class="img-fluid" alt="les cardinalités">
-          <figcaption>les cardinalités</figcaption>
-        </figure>
+      <div class="col-md-6">
+  <figure>
+    <img src="cardinalites.jpg" alt="les cardinalités">
+    <figcaption>les cardinalités</figcaption>
+  </figure>
       </div>
-      <!-- fin row  -->
-      <div class="row">
-        <h2 style="background-color: lightcyan;">8 -les tables de jointure</h2>
-        <hr>
-        <div class="col-6 border">
-          <p>une table de jointure permet de faire le lien entre 2 tables</p>
-          <p>Exemple une société de taxi, qui possède des conducteurs et des véhicules.</p>
-          <ul>
-            <li>1 conducteur peut conduire 0 ou plusieurs véhicules.</li>
-            <li>1 véhicule peut être conduit par 0 ou plusieurs conducteurs</li>
-            <p>comment savoir quel conducteur conduit quel véhicule? ou dans l'autre sens quel véhicule est conduit par
-              quel conducteur?</p>
-          </ul>
-        </div>
-        <div class="col-6 border">
-          <figure>
-            <img src="img/jointures.jpg" class="img-fluid" alt="jointures">
-            <figcaption>une table de jointure</figcaption>
-          </figure>
-        </div>
-      </div>
-      <!-- fin rangée  -->
-      <div class="row">
-        <h2 id="types" style="background-color: lightcyan;">9 - Clefs étrangères ou FK</h2> <hr>
-        <div class="col-4 border">
-          <p>Les clefs étrangères sont des champs forcément clfs primaires dans leur table d'origine et qui se
-            retrouvent dans une table extérieure.</p>
-          <p>Un champ clef étrangère permet de faire la relation avec un autre sujet</p>
-        </div>
-        <!-- fin col  -->
-        <div class="col-4 border">
-          <figure>
-            <img src="img/clef_etrangere_2.jpg" alt="">
-            <figcaption>table de jointure et les clefs étrangères</figcaption>
-          </figure>
-        </div>
-        <!-- fin col  -->
-         <div class="col-4 border">
-            <figure>
-              <img src="img/clef_etrangere_1.jpg" alt="">
-              <figcaption>les tables d'origine des clefs étrangères</figcaption>
-            </figure>
-         </div>
-        <!-- fin col  -->
-      </div>
-      <!-- fin rangée  -->
-      <div class="row">
-        <h2 style="background-color: lightcyan;">10 - Les enregistrements</h2>
-        <div class="col-12 border">
-          <p class="bg-danger text-white p-3">Chaque enregistrement représente une ligne dans la table dans la BDD. Chque nouvelle enregistrement va s'auto-incrémenter même si un ID est supprimé, il ne sera pas réutilisé !</p>
-        </div>
-      </div>
-      <!-- fin row -->
-
-      <div class="row">
-        <h2 style="background-color: lightcyan;">11 - Comment interroger la BDD</h2>
-        <div class="col-md-4 border">
-          <h3>a/ Les requêtes</h3>
-          <p>Une requête permet de poser une question afin d'obtenir une réponse, ou encore de donner un ordre. </p>
-          <p>Nous terminerons toutes nos requêtes SQL par un point virgule ";" pour que MySQL sache que nous avons terminé d'écrire et qu'il doit exécuter notre demande</p>
-          <p>De manière standard les requêtes SQL seront écrité en majuscule <code>SELECT * FROM membre;</code></p>
-        </div>
-        <!-- fin col -->
-        <div class="col-8 border">
-          <h3>b/ Types de requettes</h3>
-          <p>Il existe 4 types de requêtes :</p>
-          <ul>
-            <li>Séléction <code>SELECT</code> ; requête question / reponse, nous demandons et obtenons une reponse</li>
-            <li>Insertion <code>INSERT</code> ; requête d'action, qui aura un impact sur les données.</li>
-            <li>Modification <code>UPDATE</code> ; requête d'action, qui aura un impact sur les données.</li>
-            <li>Supression <code>DELETE</code> ; requête d'action, qui aura un impact sur les données.</li>
-          </ul>
-        </div>
-        fin col
-      </div>
-      <!-- fin rangée  -->
+      <!-- fin col  -->
   </section>
+
   <!-- fin container  -->
   <!-- Optional JavaScript -->
   <!-- Bootstrap Bundle with Popper -->

@@ -17,6 +17,16 @@
 11.Interroger la BDD
 
 ### 01_requetes.html
+1-Base d'une DBB
+2-Création d'une table
+3-SELECT et DISTINCT
+4-Les conditions
+5-Les opérateurs de comparaison
+6-ORDER BY
+7-Limiter avec LIMIT
+8-Faire des calculs
+9-Les conditions multiples
+10-Les regroupements
 ### 02_requetes.html
 ### 03_requetes_imbriquees.html
 ### 04_jointure.html
