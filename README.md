@@ -29,5 +29,11 @@
 10-Les regroupements
 ### 02_requetes.html
 ### 03_requetes_imbriquees.html
+1-Création de la BDD "bibliotheque"
+a/Modélisation
+b/Création de tables
+c/création des clefs étrangères
+d/Insertion des données
+2-SELECT sur plusieurs tables
 ### 04_jointure.html
 
