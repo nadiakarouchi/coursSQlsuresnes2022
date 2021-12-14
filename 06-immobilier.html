@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- MES STYLES -->
+    <link rel="stylesheet" href="../coursSQL/css/style.css">
+    <title>Cours SQL/ Requêtes </title>
+
+    <!-- Mon code JS est ici placé dans l'en-tête, dans l'élément head de mon fichier, à l'intérieur de la balise script. Ce code récupère l'heure et l'actualise toutes les secondes et nous permet de l'afficher ou de la masquer via un bouton -->
+    <!-- JS !!!  ; ouvrez toujours l'inspecteur de votre navigateur et sa console pour avoir les informations sur les scripts -->
+
+</head>
+
+<body>
+    <!-- navigation navbar  -->
+
+    <nav class="navbar navbar-light  fixed-top p-2">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SQL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Index</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Introduction
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                                <li><a class="dropdown-item" href="#introduction">Introduction</a></li>
+                                <li><a class="dropdown-item" href="#modelisation">Modélisation d'une BDD</a></li>
+                                <li><a class="dropdown-item" href="#table">Les tables</a></li>
+                                <li><a class="dropdown-item" href="#colonne">Les colonnes ou les champs</a></li>
+                                <li><a class="dropdown-item" href="#donnees">Les types de données</a></li>
+                                <li><a class="dropdown-item" href="#pk">Type de données PK AI pour les ID</a></li>
+                                <li><a class="dropdown-item" href="#cardinalite">Les cardinalités</a></li>
+                                <li><a class="dropdown-item" href="#jointure">Table de jointure</a></li>
+                                <li><a class="dropdown-item" href="#fk">Clefs étrangères ou Fk</a></li>
+                                <li><a class="dropdown-item" href="#enregristrement">Les enregistrements</a></li>
+                                <li><a class="dropdown-item" href="#bdd">Interroger la BDD</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../coursSQLsuresnes2022/01_requetes.html">01/Requetes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../coursSQlsuresnes2022/">02/Requetes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../coursSQLsuresnes2022/03_requetes_imbriquees.html">03/Requetes
+                                imbriquées</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../coursSQLsuresnes2022/04_jointure.html">04/Jointure</a>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- fin nav -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="img/pma.jpg" class="d-block w-75 img-fluid text-center" alt="sql">
+            </div>
+            <div class="carousel-item">
+                <img src="img/sql.jpg" class="d-block w-75 img-fluid text-center" alt="sqlmediaa">
+            </div>
+            <div class="carousel-item">
+                <img src="img/php.jpg" class="d-block w-75 img-fluid text-center" alt="php">
+            </div>
+        </div>
+    </div>
+    <!-- fin carousel -->
+
+    <!-- =================================== -->
+    <!-- en-tête de la page -->
+    <!-- =================================== -->
+    <header class="container mt-4 p-4 bg-white">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-center alert-primary alert">Cours SQL - agence immobilier- # 5</h1>
+
+            </div>
+        </div>
+        <!-- fin row  -->
+    </header>
+    <!-- fin header  -->
+
+
+    <section class="container mb-4 bg-white">
+        <div class="row">
+            <div class="col-6">
+
+                <ul>
+                    <li>Création de la BDD "immobilier" : <code>CREATE DATABASE immobilier CHARACTER SET 'utf8';</code>
+                    </li>
+                    <li>Création de la table "agence" : <code>CREATE TABLE IF NOT EXISTS agence ( <br>
+                            idAgence int(6) NOT NULL AUTO_INCREMENT, <br>
+                            nom varchar(100) NOT NULL, <br>
+                            adresse varchar(100) NOT NULL, <br>
+                            PRIMARY KEY (idAgence) <br>
+                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;</code></li>
+                </ul>
+            </div>
+            <div class="col-6"><img src="img/immo_agence.jpg" alt=""></div>
+            <!-- fin creation table  -->
+            <div class="col-6">
+                <ul>
+                    <li>Création de la table "demande" : <code>CREATE TABLE IF NOT EXISTS demande ( <br>
+                                idDemande int(5) NOT NULL AUTO_INCREMENT, <br>
+                                idPersonne int(3) NOT NULL, <br>
+                                genre varchar(100) NOT NULL, <br>
+                                ville varchar(100) NOT NULL, <br>
+                                budget int(7) NOT NULL, <br>
+                                superficie int(5) NOT NULL, <br>
+                                categorie varchar(100) NOT NULL, <br>
+                                PRIMARY KEY (idDemande), <br>
+                                KEY idPersonne (idPersonne) <br>
+                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;</code></li>
+                </ul>
+            </div>
+
+            <div class="col-6"><img src="img/immo_demande.jpg" alt=""></div>
+            <div>
+                <ul>
+                    <li>Création de la table "logement" :<code>CREATE TABLE IF NOT EXISTS logement ( <br>
+                            idLogement int(4) NOT NULL AUTO_INCREMENT, <br>
+                            genre varchar(100) NOT NULL, <br>
+                            ville varchar(100) NOT NULL, <br>
+                            prix int(7) NOT NULL, <br>
+                            superficie int(5) NOT NULL, <br>
+                            categorie varchar(100) NOT NULL, <br>
+                            PRIMARY KEY (idLogement) <br>
+                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;</code></li>
+                </ul>
+            </div>
+            <div class="col-6"><img src="img/immo_logement_agence.jpg" alt=""></div>
+            <div>
+                <li>Création de la table "logement_agence" : <code>CREATE TABLE IF NOT EXISTS logement_agence ( <br>
+                        idLogementAgence int(5) NOT NULL AUTO_INCREMENT, <br>
+                        idAgence int(6) NOT NULL, <br>
+                        idLogement int(4) NOT NULL, <br>
+                        frais int(7) NOT NULL, <br>
+                        PRIMARY KEY (idLogementAgence), <br>
+                        KEY idAgence (idAgence), <br>
+                        KEY idLogement (idLogement) <br>
+                        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;</code></li>
+            </div>
+            <div class="col-6"><img src="" alt=""></div>
+            <div>
+                <ul>
+                    <li>Création de la table "logement_personne" : <code>CREATE TABLE IF NOT EXISTS logement_personne ( <br>
+                            idLogementPersonne int(5) NOT NULL AUTO_INCREMENT, <br>
+                            idPersonne int(3) NOT NULL, <br>
+                            idLogement int(4) NOT NULL, <br>
+                            PRIMARY KEY (idLogementPersonne), <br>
+                            UNIQUE KEY idLogement (idLogement), <br>
+                            KEY idPersonne (idPersonne) <br>
+                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;</code></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>Création de la table "personne" : <code>CREATE TABLE IF NOT EXISTS personne ( <br>
+                            idPersonne int(3) NOT NULL AUTO_INCREMENT, <br>
+                            prenom varchar(100) NOT NULL, <br>
+                            PRIMARY KEY (idPersonne) <br>
+                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;</code></li>
+                    <li>Création des clefs étrangères :
+                        <code>ALTER TABLE logement_agence <br>
+                            ADD CONSTRAINT logement_agence_ibfk_2 FOREIGN KEY (idLogement) REFERENCES logement (idLogement), <br>
+                            ADD CONSTRAINT logement_agence_ibfk_1 FOREIGN KEY (idAgence) REFERENCES agence (idAgence);</code>
+                    </li>
+                </ul>
+
+            </div>
+            <h2 class="alert alert-warning text-center">exo</h2>
+            <div class="col-6">
+                <li class="alert alert-success">Affichez le nom des agences :
+                    <code>SELECT nom FROM agence  nom DESC</code></li>
+                <li class="alert alert-success">Affichez le numéro de l'agence « Orpi » :
+                    <code>SELECT idAgence FROM agence WHERE nom = 'Orpi';</code></li>
+                <li class="alert alert-success">Affichez le premier enregistrement de la table logement :
+                    <code>SELECT * FROM logement WHERE idLogement=(SELECT MIN(idLogement) FROM logement)</code> ou
+                    <code>SELECT * FROM logement LIMIT 0,1;</code></li>
+                <li class="alert alert-success">Affichez le nombre de logements (Alias : Nombre_de_logements) :
+                    <code>SELECT COUNT(idLogement) AS 'nombre de logements' FROM logement;</code></li>
+                <li class="alert alert-success">Affichez les logements à vendre à moins de 150 000 € dans l'ordre
+                    croissant des prix :
+                    <code>SELECT * FROM logement WHERE prix < 150000 AND categorie ='vente' ORDER BY prix;</code></li>
+                <li class="alert alert-success">Afficher le nombre de logements à la location (alias : 'nombre') :
+                    <code>SELECT COUNT(idLogement) AS 'nombre' FROM logement WHERE categorie = 'location';</code></li>
+                <li class="alert alert-success">Afficher les villes différentes recherchées par les personnes demandeuse
+                    d'un logement : <code>SELECT DISTINCT ville FROM demande;</code></li>
+                <li class="alert alert-success">Affichez le nombre de biens à vendre par ville :
+                    <code>SELECT ville, COUNT(ville)AS 'nombre de logements à la vente' FROM logement WHere categorie= 'vente' GROUP BY ville ASC</code><br>ou
+                    <code>SELECT COUNT(idLogement)AS 'nbr logement', ville <br>
+                    FROM logement <br>
+                    WHERE ville IN (SELECT DISTINCT(ville) FROM logement) <br>
+                    AND categorie='vente' <br>
+                    GROUP BY ville</code></li>
+                <li class="alert alert-success">Quels sont les id des logements destinés à la location ? :
+                    <code>SELECT idLogement FROM logement WHERE categorie='location';</code></li>
+                <li class="alert alert-success">Quels sont les id des logements entre 20 et 30m² ? :
+                    <code>SELECT idLogement FROM logement WHERE superficie BETWEEN '20' AND '30';</code></li>
+                    <li class="alert alert-primary">Indiquez les frais ajoutés par l’agence immobilière pour le logement ayant la référence « 5873 » : <code>SELECT logement_agence.frais, agence.nom, logement.prix, agence.idAgence, logement_agence.idAgence, (logement.prix + logement_agence.frais) as 'frais ajoutés' <br>
+                        FROM logement_agence, logement, agence <br>
+                        WHERE logement_agence.idLogement='5873' <br>
+                        AND logement_agence.idLogement =logement.idLogement <br>
+                        AND agence.idAgence = logement_agence.idAgence</code></li>
+
+                    <li class="alert alert-primary">Si l'ensemble des logements étaient vendus ou loués demain, quel serait le bénéfice généré grâce aux frais d'agence et pour chaque agence (Alias : benefice, classement : par ordre croissant des gains) : <code><br> SELECT agence.nom, 
+                        SUM(logement_agence.frais) <br>
+                        AS 'total_des_frais' <br>
+                        FROM agence, logement_agence <br>
+                        WHERE agence.idAgence = logement_agence.idAgence <br>
+                        GROUP BY agence.nom <br>
+                        ORDER BY total_des_frais ASC
+                     </code></li>
+
+                    <li class="alert alert-primary">Affichez les id des biens en location, les prix, suivis des frais d'agence (classement : dans l'ordre croissant des prix) : <code>SELECT a.nom, l.idLogement, l.prix, la.frais FROM agence a, logement l, logement_agence la WHERE l.idLogement = la.idLogement AND a.idAgence = la.idAgence AND l.categorie = 'location' ORDER BY l.prix ASC</code></li>
+
+                    <li class="alert alert-primary">Quel est le prénom du propriétaire proposant le logement le moins cher à louer ? : <code>SELECT personne.prenom, logement.prix FROM personne, logement, logement_personne WHERE personne.idPersonne = logement_personne.idPersonne AND logement_personne.idLogement = logement.idLogement AND categorie ='location' ORDER BY logement.prix ASC LIMIT 0,1 </code> ou en version imbriquée et MIN : <code>SELECT personne.prenom, logement.prix, logement.idLogement FROM personne, logement, logement_personne WHERE personne.idPersonne = logement_personne.idPersonne AND logement_personne.idLogement = logement.idLogement AND categorie ='location' AND logement.prix = (SELECT MIN(logement.prix) FROM logement) </code> ou <code>SELECT prenom FROM personne WHERE idPersonne 
+                        IN (SELECT idPersonne FROM logement_personne WHERE idLogement 
+                        IN (SELECT idLogement FROM logement WHERE categorie ='location' 
+                        AND prix = (SELECT MIN(prix) FROM logement WHERE categorie='location')));</code></li>
+
+                    <li class="alert alert-primary">Affichez le prénom et la ville où se trouve le logement de chaque propriétaire : <code>SELECT personne.prenom, logement.ville, logement.idLogement FROM personne, logement, logement_personne WHERE personne.idPersonne = logement_personne.idPersonne AND logement_personne.idLogement = logement.idLogement </code></li>
+                </ol>
+                    
+            </div>
+            <!-- fin col  -->
+
+            <div class="col-6">
+                <li class="alert alert-danger">Quel est le prix vendeur(hors comissission) du logement le moins cher a
+                    vendre ? : <code>FROM logement WHERE categorie = 'vente' ORDER BY prix ASC LIMIT 0,1;</code> OU
+                    <code>SELECT MIN(prix) AS 'prix minimum' FROM logement WHERE categorie = 'vente';</code></li>
+                <li class="alert alert-danger">Dans quelle ville se trouve les maisons à vendre ? :
+                    <code>SELECT DISTINCT(ville) FROM logement WHERE genre = 'maison' AND categorie = 'vente';</code>
+                </li>
+                <li class="alert alert-danger">L'agence Orpi souhaite diminuer les frais qu'elle applique sur le
+                    logement ayant l'id « 5246 ». Passer les frais de ce logement de 800 à 730€ : <code> UPDATE logement_agence SET frais ='1200000' WHERE idLogement = '5246' AND idAgence = (SELECT idAgence FROM agence WHERE nom ='orpi')
+
+                </code></li>
+                <li class="alert alert-danger">Quels sont les logements gérés par l'agence « laforet » :
+                    <code>SELECT idLogement FROM logement_agence WHERE idAgence = (SELECT idAgence FROM agence WHERE nom = 'laforet')</code>
+                </li>
+                <li class="alert alert-danger">Affichez le nombre de propriétaires dans la ville de Paris (Alias :
+                    Nombre propriétaire parisien) : <code>SELECT COUNT(DISTINCT(logement_personne.idPersonne)) <br>
+                    AS 'nombre de propriétaire parisiens' <br>
+                    FROM logement_personne, logement <br>
+                    WHERE logement_personne.idLogement = logement.idLogement <br>
+                    AND logement.ville='paris'</code></li>
+                <li class="alert alert-danger">Afficher les infos des trois premières personnes souhaitant acheter un
+                    logement :
+                    <code>SELECT * FROM personne p, demande d  WHERE p.idPersonne = d.idPersonne and d.categorie = 'vente' ORDER BY d.idDemande LIMIT 0,3;</code>
+                </li>
+                <li class="alert alert-primary"> Affichez le prénom du vendeur pour le logement ayant la référence «
+                    5770 »<code>SELECT personne.prenom, logement_personne.idLogement
+                    FROM personne, logement_personne
+                    WHERE personne.idPersonne = logement_personne.idPersonne
+                    AND logement_personne.idLogement = 5770</code> <br> <hr> ou <code>SELECT personne.prenom, logement_personne.idLogement, logement.ville, logement.superficie, logement.genre, agence.nom
+                        FROM personne, logement_personne, logement, agence, logement_agence
+                        WHERE personne.idPersonne = logement_personne.idPersonne
+                        AND logement_personne.idLogement = logement.idLogement
+                        AND logement_personne.idLogement = logement_agence.idLogement
+                        AND agence.idAgence = logement_agence.idAgence
+                        AND logement_personne.idLogement = 5770</code> <br> <hr> ou <code>SELECT personne.prenom, logement_personne.idLogement, logement.ville, logement.genre
+                            FROM personne, logement_personne, logement
+                            WHERE personne.idPersonne = logement_personne.idPersonne
+                            AND logement.idLogement = logement_personne.idLogement
+                            AND logement_personne.idLogement = 5770</code></li>
+                <li class="alert alert-primary">Affichez les prénoms des personnes souhaitant avoir un logement à
+                    Lyon<code> <br> SELECT personne.prenom, demande.ville <br>
+                    FROM personne, demande <br>
+                    WHERE personne.idPersonne = demande.idPersonne <br>
+                    AND demande.ville = 'lyon';</code></li>
+                <li class="alert alert-success">Affichez les prénoms des personnes souhaitant accéder à un logement en
+                    location à
+                    Paris <br><code>SELECT personne.prenom, demande.ville, demande.categorie <br> FROM personne, demande WHERE personne.idPersonne = demande.idPersonne <br> AND demande.ville = 'Paris' <br> AND demande.categorie = 'location';</code>
+                </li>
+                <li class="alert alert-primary">Affichez les prénoms des personnes souhaitant acheter un logement de la plus grande à la plus petite
+                    superficie :<code><br> SELECT personne.prenom, personne.idPersonne, demande.superficie <br>
+                        FROM personne, demande <br>
+                        WHERE personne.idPersonne = demande.idPersonne <br>
+                        AND demande.categorie='vente' <br>
+                        ORDER BY demande.superficie DESC</code></li>
+                        <li class="alert alert-success">Quel sont les prix finaux proposés par les agences pour la maison à la vente ayant la référence « 5091 » ?<code><br> SELECT agence.nom, (logement_agence.frais+logement.prix) <br>
+                            AS 'prix finaux' 
+                            FROM agence, logement_agence, logement <br>
+                            WHERE agence.idAgence = logement_agence.idAgence <br>
+                            AND logement.idLogement = logement_agence.idLogement <br>
+                            AND logement_agence.idLogement = 5091</code></li>
+                            <li class="alert alert-success">affichez le nombre de logements à la vente dans la ville de recherche de « hugo » (alias : nombre)
+
+                                <code>SELECT COUNT(logement.idLogement) AS 'nombre logements ville hugo' <br>
+                                    FROM personne, demande, logement <br>
+                                    WHERE personne.idPersonne = demande.idPersonne <br>
+                                    AND personne.prenom = 'hugo' <br>
+                                    AND logement.categorie = 'vente' <br>
+                                    AND demande.ville = logement.ville; <br>
+                                    
+                                    </code></li>
+                                    <li class="alert alert-primary">Affichez le nombre de logements à la vente dans la ville de recherche de « hugo » et dans la superficie minimum qu’il attend ou dans une
+                                        superficie supérieure (alias : nombre):<code>SELECT COUNT(logement.idLogement) <br>
+                                             AS 'nombre logements ville hugo', demande.superficie <br>
+                                             AS 'sup min' FROM personne, demande, logement <br>
+                                             WHERE personne.idPersonne = demande.idPersonne <br>
+                                             AND personne.prenom = 'hugo' <br>
+                                              AND logement.categorie = 'vente'<br>
+                                               AND demande.ville = logement.ville <br>
+                                               AND demande.superficie >= logement.superficie;</code></li>
+                            
+            </div>
+        </div>
+        <!-- fin row  -->
+
+        <div class="p-2 mx-2">
+            <footer class="text-center text-lg-start bg-jaune">
+
+                <!-- Copyright -->
+                <div class="text-center text-white p-5 m-5" style="background-color: mistyrose;">
+                    &copy; Colombbus 2021-2022 : Nadia
+                </div>
+            </footer>
+    </section>
+    <!-- fin container -->
+    <!-- Optional JavaScript -->
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
